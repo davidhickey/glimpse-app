@@ -1,6 +1,6 @@
 "use client";
 
-import useLeadsData from "./hooks/useLeadsData";
+import useLeadsData from "@/components/hooks/useLeadsData";
 import LeadsSearch from "../LeadsSearch";
 import LeadsFilter from "../LeadsFilter";
 import LeadsTable from "../LeadsTable";

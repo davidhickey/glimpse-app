@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import { Lead } from "..";
+import { Lead } from "../features/Leads/LeadsMain";
 
 type FilterValue = {
   type: string;
