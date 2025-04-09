@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Project Overview
 
-I focused on building out a frontend table that includes a search and filter component. I also built out an Upload popup for uploading CSV files. Performance-wise, I focused on taking advantage of Next's startic rendering capabilities and leveraging React's useMemo for the filtered data in the table. One limitation is that only one filter can be used at a time and if I had more time I'd build out the ability to stack filters along with search. Scalability-wise I tried to seperate out my core data manipulation logic into a seperate re-usable custom hook called useLeadsData. If I had more time to work on the rest of the stack, I'd love create a Leads db table using Prisma and connect to it via Next's API route handlers.
+I focused on building out a frontend table that includes a search and filter component. I also built out an Upload popup for uploading CSV files. Performance-wise, I focused on taking advantage of Next's startic rendering capabilities and leveraging React's useMemo for the filtered data in the table. One limitation is that only one filter can be used at a time and if I had more time I'd build out the ability to stack filters along with search. Scalability-wise I tried to seperate out my core data manipulation logic into a seperate re-usable custom hook called useLeadsData. If I had more time to work on the rest of the stack, I'd love create a Leads db table using Prisma and connect to it via Next's API route handlers. I'd also try to accomplish more the requirements listed in the assessment spec.
 
 ## Deployed Link:
 https://glimpse-app-tau.vercel.app/
