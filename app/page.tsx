@@ -1,14 +1,60 @@
 import Image from "next/image";
 
-import { getUsers } from "@/lib/prisma/methods";
+//reqs
+//see leads in a table component
+//api flow > ui initiates > useHook > api methods -> server api http req
+//upload a csv that adds DB data
+
+import { getUser, getUsers } from "@/lib/prisma/methods";
+import LeadsTable from "@/components/LeadsTable";
+const leads = [
+  {
+    id: 1,
+    name: "John Doe",
+    contact: "john.doe@example.com",
+    source: "Google",
+    interest_level: "high",
+    status: "new",
+    assigned_to: "John Doe",
+  },
+  {
+    id: 2,
+    name: "Zed Doe",
+    contact: "jane.doe@example.com",
+    source: "Google",
+    interest_level: "medium",
+    status: "new",
+    assigned_to: "John Doe",
+  },
+  {
+    id: 3,
+    name: "Tim Smith",
+    contact: "john.smith@example.com",
+    source: "Google",
+    interest_level: "low",
+    status: "old",
+    assigned_to: "John Doe",
+  },
+  {
+    id: 4,
+    name: "Jane Smith",
+    contact: "jane.smith@example.com",
+    source: "Google",
+    interest_level: "high",
+    status: "old",
+    assigned_to: "John Doe",
+  },
+];
 
 export default async function Home() {
   const users = await getUsers();
+  // const user = await getUser(users.data[0].id);
   console.log(users);
+  // console.log('user', user);
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start w-full">
         <Image
           className="dark:invert"
           src="/next.svg"
@@ -21,9 +67,12 @@ export default async function Home() {
           <h1>Test Users</h1>
           <ul>
             {users.data.map((user) => (
-              <li key={user.id}>Name: {user.name}, Email: {user.email}, ID: {user.id}</li>
+              <li key={user.id}>
+                Name: {user.name}, Email: {user.email}, ID: {user.id}
+              </li>
             ))}
           </ul>
+          <LeadsTable leads={leads} />
         </div>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
