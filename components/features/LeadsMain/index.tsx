@@ -1,4 +1,21 @@
-const LeadsMain = () => {
+"use client";
+import useLeadsData from "./hooks/useLeadsData";
+
+export interface Lead {
+  id: number;
+  name: string;
+  contact: string;
+  source: string;
+  interest_level: string;
+}
+
+const LeadsMain = ({leads}: {leads: Lead[]}) => {
+  const { leadsData, activePayloads, setActivePayloads } = useLeadsData({
+    initialData: leads,
+  });
+
+  const colNames = Object.keys(leads[0]).map((key) => key.replace(/_/g, ' '));
+
   return (
     <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style={{fontFamily: 'Inter, "Noto Sans", sans-serif'}}>
       <div className="layout-container flex h-full grow flex-col">
@@ -59,306 +76,37 @@ const LeadsMain = () => {
                 <table className="flex-1">
                   <thead>
                     <tr className="bg-white">
-                      <th className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">Name</th>
-                      <th className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">Contact</th>
-                      <th className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 px-4 py-3 text-left text-[#111418] w-60 text-sm font-medium leading-normal">Source</th>
-                      <th className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 px-4 py-3 text-left text-[#111418] w-60 text-sm font-medium leading-normal">
-                        Interest level
-                      </th>
-                      <th className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 px-4 py-3 text-left text-[#111418] w-60 text-sm font-medium leading-normal">Status</th>
+                      {colNames.map((colName) => (
+                        <th key={colName} className={`column-${colName} capitalize px-4 py-3 text-left text-[#111418] min-w-[100px] text-sm font-medium leading-normal`}>{colName}</th>
+                      ))}
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Samantha Jones
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        samantha.jones@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Referral</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">High</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Open</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        John Smith
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        john.smith@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Cold Call</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Medium</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Closed</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Emily Davis
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        emily.davis@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Webinar</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Low</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Open</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Michael Johnson
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        michael.johnson@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Social Media</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">High</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Closed</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Jessica Brown
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        jessica.brown@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Email Campaign</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Medium</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Open</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        William Taylor
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        william.taylor@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Trade Show</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Low</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Closed</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Ava White
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        ava.white@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Content Download</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">High</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Open</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Daniel Lee
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        daniel.lee@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Partner Referral</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Medium</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Closed</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Olivia Harris
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        olivia.harris@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Paid Ads</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Low</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Open</span>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className="border-t border-t-[#dce0e5]">
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                        Ethan Martin
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[400px] text-[#637588] text-sm font-normal leading-normal">
-                        ethan.martin@mail.com
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Direct Mail</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">High</span>
-                        </button>
-                      </td>
-                      <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                        <button
-                          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full"
-                        >
-                          <span className="truncate">Closed</span>
-                        </button>
-                      </td>
-                    </tr>
+                  {leadsData?.map((lead) => (
+                        <tr key={lead.id} className="border-t border-t-[#dce0e5]">
+                          <td className="h-[72px] px-4 py-2 w-[100px] text-[#111418] text-sm font-normal leading-normal">
+                            {lead.id}
+                          </td>
+                          <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-120 h-[72px] px-4 py-2 w-[100px] text-[#111418] text-sm font-normal leading-normal">
+                            {lead.name}
+                          </td>
+                          <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-240 h-[72px] px-4 py-2 w-[100px] text-[#637588] text-sm font-normal leading-normal">
+                            {lead.contact}
+                          </td>
+                          <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-360 h-[72px] px-4 py-2 w-[100px] text-sm font-normal leading-normal">
+                            {lead.source}
+                          </td>
+                          <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-480 h-[72px] px-4 py-2 w-[100px] text-sm font-normal leading-normal">
+                            <span className="rounded-xl h-12 flex items-center justify-center px-4 bg-[#f0f2f4] text-white text-sm font-medium leading-normal w-full" style={{backgroundColor: lead.interest_level === 'low' ? '#637588' : lead.interest_level === 'medium' ? 'orange' : 'green'}}>{lead.interest_level}</span>
+                          </td>
+                          <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-[100px] text-sm font-normal leading-normal">
+                            <span className="rounded-xl h-12 flex items-center justify-center px-4 bg-[#f0f2f4] text-white text-sm font-medium leading-normal w-full" style={{backgroundColor: lead.status === 'new' ? 'green' : '#637588'}}>{lead.status}</span>
+                          </td>
+                          <td className="table-1a64bc95-4b42-4edc-8ce8-59588841c66e-column-600 h-[72px] px-4 py-2 w-[100px] text-sm font-normal leading-normal">
+                            <span className="rounded-xl h-12 flex items-center justify-center px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal w-full">{lead.assigned_to}</span>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>

@@ -9,8 +9,8 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z"
               fill="currentColor"
             ></path>
