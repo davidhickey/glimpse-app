@@ -65,7 +65,7 @@ const LeadsMain = ({ leads }: { leads: Lead[] }) => {
               />
             </div>
             <div className="px-4 py-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              <div className="min-w-[960px]">
+              <div className="max-w-[960px]">
               <LeadsTable
                 leadsData={leadsData}
                 colNames={colNames}
