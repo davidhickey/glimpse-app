@@ -20,8 +20,8 @@ const LeadsMain = ({ leads }: { leads: Lead[] }) => {
     useLeadsData({
       initialData: leads,
     });
-
-  //Assigned To Filter Options
+  
+    //Assigned To Filter Options
   const assignedToOptions = [
     ...new Set(leads?.map((lead) => lead.assigned_to)),
   ];
@@ -53,11 +53,11 @@ const LeadsMain = ({ leads }: { leads: Lead[] }) => {
             </h1>
             <LeadsFilter
               filterValue={filterValue}
-                emitOnClick={handleFilter}
-                interestLevelColors={interestLevelColors}
-                statusColors={statusColors}
-                assignedToOptions={assignedToOptions}
-              />
+              emitOnClick={handleFilter}
+              interestLevelColors={interestLevelColors}
+              statusColors={statusColors}
+              assignedToOptions={assignedToOptions}
+            />
             <div className="px-4 py-3">
               <LeadsSearch
                 searchValue={searchValue}
@@ -66,13 +66,13 @@ const LeadsMain = ({ leads }: { leads: Lead[] }) => {
             </div>
             <div className="px-4 py-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               <div className="max-w-[960px]">
-              <LeadsTable
-                leadsData={leadsData}
-                colNames={colNames}
-                interestLevelColors={interestLevelColors}
-                statusColors={statusColors}
-              />    
-              </div>          
+                <LeadsTable
+                  leadsData={leadsData}
+                  colNames={colNames}
+                  interestLevelColors={interestLevelColors}
+                  statusColors={statusColors}
+                />
+              </div>
             </div>
           </div>
         </div>

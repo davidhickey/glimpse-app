@@ -4,7 +4,7 @@ const CSVForm = () => {
   const [file, setFile] = useState<File | null>(null);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
-    //Todo: add validation logic here to make sure file is a csv and has the correct columns
+    //Todo: add validation logic here to make sure file has the correct columns
     if (selectedFile) {
       setFile(selectedFile);
     }
