@@ -2,53 +2,60 @@
 import { useMemo, useState } from "react";
 import { Lead } from "..";
 
-
-interface Payload {
+type FilterValue = {
   type: string;
-  value: any;
+  value: string;
 }
-
-
-// const handleSearchData = (data: Lead[], payload: Payload[]) => {
-  
-// }
-
-// const handleSortData = (data: Lead[], payload: Payload[]) => {
-//   return data.sort((a, b) => {
-//     return a[payload.type] - b[payload.type];
-//   });
-// }
-
-// const handleFilterData = (data: Lead[], payload: Payload[]) => {
-//   return data.filter((lead) => {
-//     return payload.some((payload) => {
-//       return lead[payload.type] === payload.value;
-//     });
-//   });
-// }
-
-
 const useLeadsData = ({
-  payload,
   initialData,
 }: {
-  payload?: Payload[];
   initialData?: Lead[];
 }) => {
-  const [activePayloads, setActivePayloads] = useState<Payload[]>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [filterValue, setFilterValue] = useState<FilterValue>({
+    type: '',
+    value: ''
+  });
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterValue({type: '', value: ''});
+    setSearchValue(e.target.value);
+  }
+
+  const handleFilter = (type: string, value: string) => {
+    if((type === 'interest_level' && value === 'all') || (type === 'status' && value === 'all') || (type === 'assigned_to' && value === 'all')) {
+      setFilterValue({type: '', value: ''});
+    } else {
+      setFilterValue({type, value});
+    }
+  }
+
 
   const leadsData = useMemo(() => {
-    if(activePayloads.length === 0) {
-      return initialData;
+    if(!searchValue && !filterValue.type && !filterValue.value) return initialData;
+    if(searchValue) {
+      return initialData?.filter((lead) => {
+        return lead.name.toLowerCase().includes(searchValue.toLowerCase()) || lead.contact.toLowerCase().includes(searchValue.toLowerCase());
+      });
     }
-    return activePayloads.map((payload) => {
-      return {
-        ...payload,
-      };
-    });
-  }, [initialData, activePayloads]);
+    if(filterValue.type && filterValue.value) {
+      return initialData?.filter((lead) => {
+        if(filterValue.type === 'interest_level') {
+          return lead.interest_level === filterValue.value;
+        }
+        if(filterValue.type === 'status') {
+          return lead.status === filterValue.value;
+        }
+        if(filterValue.type === 'assigned_to') {
+          return lead.assigned_to === filterValue.value;
+        }
+      });
+    }
 
-  return { leadsData, activePayloads, setActivePayloads };
+    
+  }, [initialData, searchValue, filterValue]);
+
+  return { leadsData, searchValue, handleSearch, filterValue, handleFilter };
 };
 
 export default useLeadsData;
