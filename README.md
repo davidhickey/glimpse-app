@@ -1,5 +1,25 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project Overview
+
+I focused on building out a frontend table that includes a search and filter component. I also built out an Upload popup for uploading CSV files. Performance-wise, I focused on taking advantage of Next's startic rendering capabilities and leveraging React's useMemo for the filtered data in the table. One limitation is that only one filter can be used at a time and if I had more time I'd build out the ability to stack filters along with search. Scalability-wise I tried to seperate out my core data manipulation logic into a seperate re-usable custom hook called useLeadsData. If I had more time to work on the rest of the stack, I'd love create a Leads db table using Prisma and connect to it via Next's API route handlers.
+
+## Deployed Link:
+https://glimpse-app-tau.vercel.app/
+
+## Creating the UI
+
+1. Use ChatGPT to create an efficient text prompt for Galileo.ai. Galileo.ai is an ai tool that has a text to UI feature.
+![Screenshot 2025-04-09 at 1 14 28 PM](https://github.com/user-attachments/assets/c24110a0-e1de-4659-9c96-3c49b6928867)
+
+
+2. Generate UI mock-ups with Galileo.ai. These mock-ups include the underling HTML + tailwind CSS as well as a figma file.
+![Screenshot 2025-04-09 at 1 17 45 PM](https://github.com/user-attachments/assets/1e43feae-b022-4ce9-8731-bbd74603f0a6)
+
+3. Build out my skeleton UI based on Galileo's mocks.
+![Screenshot 2025-04-09 at 6 57 12 PM](https://github.com/user-attachments/assets/d0fc59a3-9858-49e8-b994-11e33d0b76ab)
+
+
 ## Getting Started
 
 First, run the development server:
