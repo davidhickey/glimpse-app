@@ -47,7 +47,7 @@ const LeadsFilter = ({
           </span>
         </p>
         <div
-          className="text-[#111418] cursor-pointer"
+          className="text-[#111418] cursor-pointer flex"
           style={{
             color: filterValue.type === "interest_level" ? "white" : "",
           }}
