@@ -5,7 +5,7 @@
 //upload a csv that adds DB data
 
 import { getUsers } from "@/lib/prisma/methods";
-import LeadsMain from "@/components/features/LeadsMain";
+import LeadsMain from "@/components/features/Leads/LeadsMain";
 import leads from "@/lib/prisma/sampleData";
 
 
