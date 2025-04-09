@@ -33,7 +33,7 @@ const LeadsTable = ({ leads }: { leads: Lead[] }) => {
       });
     }
     return leads
-  },[sort]);
+  },[sort, leads]);
 
 
     
