@@ -13,8 +13,8 @@ const LeadsTable = ({
 }) => {
   if (!leadsData) return null;
   return (
-    <div className="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white">
-      <table className="flex-1">
+    <div className="flex overflow-y-hidden rounded-xl border border-[#dce0e5] bg-white overflow-x-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <table className="flex-l w-full">
         <thead>
           <tr className="bg-white">
             {colNames.map((colName) => (

@@ -64,7 +64,7 @@ const LeadsMain = ({ leads }: { leads: Lead[] }) => {
                 emitOnChange={handleSearch}
               />
             </div>
-            <div className="px-4 py-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="px-4 py-3">
               <div className="max-w-[960px]">
                 <LeadsTable
                   leadsData={leadsData}
